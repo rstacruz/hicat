@@ -20,7 +20,7 @@ function Hicat (data, fname) {
 Hicat.colors = {
   title: '4',
 
-  comment: '32',
+  comment: '33',
 
   string: '32',
   number: '33',
