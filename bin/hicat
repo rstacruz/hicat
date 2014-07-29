@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+var read = require('../lib/read');
+var hicat = require('../index');
+var argv = process.argv.slice(2);
+
+read.from(argv, function (err, files) {
+  if (err) throw err;
+
+  for (var fname in files) {
+    if (!files.hasOwnProperty(fname)) continue;
+    var data = files[fname];
+    var output = hicat(data, fname);
+    process.stdout.write(output);
+  }
+});
+
