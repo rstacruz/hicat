@@ -1,15 +1,29 @@
 #!/usr/bin/env node
+var args = require('nopt')({
+  type: String,
+  debug: Boolean,
+  version: Boolean,
+  help: Boolean
+}, {
+  h: '--help',
+  v: '--version',
+  t: '--type'
+}, process.argv);
+
 var read = require('../lib/read');
 var hicat = require('../index');
-var argv = process.argv.slice(2);
 
-read.from(argv, function (err, files) {
+if (args.debug) {
+  process.env.HICAT_DEBUG = true;
+}
+
+read.from(args.argv.remain, function (err, files) {
   if (err) throw err;
 
   for (var fname in files) {
     if (!files.hasOwnProperty(fname)) continue;
     var data = files[fname];
-    var output = hicat(data, fname);
+    var output = hicat(data, { filename: fname, type: args.type });
     process.stdout.write(output);
   }
 });

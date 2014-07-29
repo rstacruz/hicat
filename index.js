@@ -1,20 +1,33 @@
 var hljs = require('highlight.js');
 
-function Hicat (data, fname) {
-  var ext = extname(fname);
+/**
+ * Hicat() : Hicat(str, options)
+ * Highlights a given `str` string.
+ *
+ *   Hicat("echo 'hi'", { filename: 'script.sh' })
+ *
+ * Options available:
+ *
+ * ~ filename (string): Filename
+ * ~ type (string): File type
+ */
+
+function Hicat (str, options) {
+  if (!options) options = {};
+  var ext = options.type || (options.filename && extname(options.filename));
   if (ext) {
     try {
-      data = hljs.highlight(ext, data).value;
+      str = hljs.highlight(ext, str).value;
     } catch (e) {
-      data = hljs.highlightAuto(data).value;
+      str = hljs.highlightAuto(str).value;
     }
   } else {
-    data = hljs.highlightAuto(data).value;
+    str = hljs.highlightAuto(str).value;
   }
 
-  if (!data) throw new Error("failed to highlight");
-  data = html2ansi(data);
-  return data;
+  if (!str) throw new Error("failed to highlight");
+  str = html2ansi(str);
+  return str;
 }
 
 Hicat.colors = {
