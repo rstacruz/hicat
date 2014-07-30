@@ -2,12 +2,11 @@ var expect = require('chai').expect,
     hicat = require('../index'),
     extend = require('util')._extend;
 
-var str;
-
 describe('Hicat the module', function() {
   it('is a function', function () {
     expect(hicat).be.a('function');
   });
+
   it('has colors', function () {
     expect(hicat.colors).be.a('object');
     expect(hicat.colors.string).be.a('string');
@@ -15,8 +14,24 @@ describe('Hicat the module', function() {
 });
 
 describe('A simple example', function() {
+  var str, out, input;
+
   beforeEach(function () {
-    str = hicat('var x = 2 + "hi"; /*yo*/');
+    input = 'var x = 2 + "hi"; /*yo*/';
+    out = hicat(input);
+    str = out.ansi;
+  });
+
+  it('produces .language', function () {
+    expect(out.language).be.eql('haxe');
+  });
+
+  it('produces .ansi', function () {
+    expect(out.ansi).be.a('string');
+  });
+
+  it('produces .raw', function () {
+    expect(out.raw).eql(input);
   });
 
   it('produces ansi codes', function () {

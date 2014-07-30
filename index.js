@@ -15,19 +15,25 @@ var hljs = require('highlight.js');
 function Hicat (str, options) {
   if (!options) options = {};
   var lang = options.lang || (options.filename && extname(options.filename));
+  var out;
   if (lang) {
     try {
-      str = hljs.highlight(ext, str).value;
+      out = hljs.highlight(ext, str);
     } catch (e) {
-      str = hljs.highlightAuto(str).value;
+      out = hljs.highlightAuto(str);
     }
   } else {
-    str = hljs.highlightAuto(str).value;
+    out = hljs.highlightAuto(str);
   }
 
-  if (!str) throw new Error("failed to highlight");
-  str = html2ansi(str);
-  return str;
+  if (!out || !out.value) throw new Error("failed to highlight");
+  out.ansi = html2ansi(out.value);
+  return {
+    ansi: out.ansi,
+    language: out.language,
+    html: out.value,
+    raw: str
+  };
 }
 
 /**

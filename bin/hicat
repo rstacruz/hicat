@@ -36,7 +36,6 @@ if (args.version) {
 
 if (args.debug) {
   process.env.HICAT_DEBUG = true;
-  console.log(args);
 }
 
 if (args.languages) {
@@ -51,7 +50,10 @@ read.from(args.argv.remain, function (err, files) {
     if (!files.hasOwnProperty(fname)) continue;
     var data = files[fname];
     var output = hicat(data, { filename: fname, lang: args.lang });
-    process.stdout.write(output);
+    if (process.env.HICAT_DEBUG) {
+      console.log({ language: output.language });
+    }
+    process.stdout.write(output.ansi);
   }
 });
 
