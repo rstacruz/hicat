@@ -34,16 +34,19 @@ Hicat.colors = {
   keyword: '1',
   built_in: 'keyword',
 
-  title: '4',
+  title: '4', /* tags, function names */
 
   comment: '33',
+  doctype: 'comment',
+  pi: 'comment', /* xml declaration */
 
   string: '32',
-  value: 'string',
+  value: 'string', /* html/json values */
 
   number: '33',
+  symbol: 'number', /* ruby :symbols */
 
-  attribute: '34',
+  attribute: '34', /* html/json attributes */
   literal: 'attribute',
 
   regexp: '35'
@@ -71,7 +74,7 @@ function html2ansi (str) {
       if (process.env.HICAT_DEBUG) s = s + "\033[30m[" + token + "]\033[0m";
       return code ? ("\033[" + code + "m" + s + "\033[0m") : s;
     })
-    .replace(/<span class="hljs-([^"]*)">/g, '')
+    .replace(/<span class="([^"]*)">/g, '')
     .replace(/<\/span>/g, '')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')

@@ -2,8 +2,8 @@
   "name": "hicat",
   "author": "Rico Sta. Cruz <hi@ricostacruz.com>",
   "license": "MIT",
-  "version": "0.0.0",
-  "description": "CLI syntax highlighter.",
+  "version": "0.1.0",
+  "description": "Command-line syntax highlighter.",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
