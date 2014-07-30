@@ -13,6 +13,32 @@ describe('Hicat the module', function() {
   });
 });
 
+describe('Explicitly setting the language', function() {
+  var out, input;
+
+  beforeEach(function () {
+    input = 'var x = 2 + "hi"; /*yo*/';
+    out = hicat(input, { lang: 'javascript' });
+  });
+
+  it('produces .language', function () {
+    expect(out.language).be.eql('javascript');
+  });
+});
+
+describe('Explicitly setting an invalid language', function() {
+  var str, out, input;
+
+  beforeEach(function () {
+    input = '{"a":2}';
+    out = hicat(input, { lang: 'aoeu' });
+  });
+
+  it('auto-detects the language', function () {
+    expect(out.language).be.eql('json');
+  });
+});
+
 describe('A simple example', function() {
   var str, out, input;
 
@@ -36,7 +62,7 @@ describe('A simple example', function() {
 
   it('produces ansi codes', function () {
     var code = str.replace(/\033[^m]+m/g, '');
-    expect(code).eql('var x = 2 + "hi"; /*yo*/');
+    expect(code).eql(input);
   });
 
   it('highlights numbers', function () {
