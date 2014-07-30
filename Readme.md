@@ -2,16 +2,16 @@
 
 <img src="http://ricostacruz.com/hicat/hicat.gif">
 
-`cat` with syntax highlighting. Auto-detects the language via the file 
-extension, or tries to infer it automatically.
+`cat` with syntax highlighting. The language is auto-detected through the file 
+extension.
 
     hicat index.js
 
-Pipe something to `hicat`. It will figure out what language it is in.
+Pipe something to `hicat`. The language will be inferred from the contents.
 
     curl http://site.com | hicat
 
-If hicat fails to detect a language, explicitly pass it `-l LANG`.
+If hicat fails to detect a language, specify it using `-l LANG`.
 
     curl http://site.com | hicat -l xml
 
