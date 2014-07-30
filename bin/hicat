@@ -56,17 +56,20 @@ read.from(args.argv.remain, function (err, files) {
     process.exit(8);
   }
 
+  var str = '';
+
   for (var fname in files) {
     if (!files.hasOwnProperty(fname)) continue;
     var data = files[fname];
     var output = hicat(data, { filename: fname, lang: args.lang });
-    var str = output.ansi;
+    str += output.ansi;
     if (process.env.HICAT_DEBUG) {
       str += "\nlanguage: " + output.language + "\n";
     }
-    if (process.env.HICAT_NO_PAGER)
-      process.stdout.write(str);
-    else
-      term.print(str);
   }
+
+  if (process.env.HICAT_NO_PAGER || files['-'])
+    process.stdout.write(str);
+  else
+    term.print(str);
 });
