@@ -36,6 +36,13 @@ Usage:
           -l, --lang LANG    use a given language
               --languages    list available languages
 
+Tips and tricks
+---------------
+
+Add an alias to your `~/.bashrc` to save a few keystrokes.
+
+    alias hi=hicat
+
 Thanks
 ------
 
