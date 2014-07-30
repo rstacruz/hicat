@@ -18,7 +18,7 @@ function Hicat (str, options) {
   var out;
   if (lang) {
     try {
-      out = hljs.highlight(ext, str);
+      out = hljs.highlight(lang, str);
     } catch (e) {
       out = hljs.highlightAuto(str);
     }
