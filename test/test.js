@@ -70,7 +70,7 @@ describe('A simple example', function() {
   });
 
   it('highlights comments', function () {
-    expect(str).include('\033[33m/*yo*/\033[0m');
+    expect(str).include('\033[30m/*yo*/\033[0m');
   });
 });
 
