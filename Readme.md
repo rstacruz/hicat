@@ -11,9 +11,9 @@ Pipe something to `hicat`. It will figure out what language it is in.
 
     curl http://site.com | hicat
 
-If hicat fails to detect a language, explicitly pass it `-t TYPE`.
+If hicat fails to detect a language, explicitly pass it `-l LANG`.
 
-    curl http://site.com | hicat -t xml
+    curl http://site.com | hicat -l xml
 
 Installation
 ------------
@@ -27,13 +27,13 @@ Usage:
     $ hicat --help
 
       Usage:
-          hicat [options] [file]
+          hicat [options] FILE
           ... | hicat [options]
 
       Options:
           -h, --help         print usage information
           -v, --version      show version info and exit
-          -t, --type TYPE    use a given file type
+          -l, --lang LANG    use a given language
 
 Thanks
 ------
