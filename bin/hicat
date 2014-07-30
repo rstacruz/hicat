@@ -13,8 +13,28 @@ var args = require('nopt')({
 var read = require('../lib/read');
 var hicat = require('../index');
 
+if (args.help) {
+  console.log([
+      'Usage:',
+      '    hicat [options] [file]',
+      '    ... | hicat [options]',
+      '',
+      'Options:',
+      '    -h, --help         print usage information',
+      '    -v, --version      show version info and exit',
+      '    -t, --type TYPE    use a given file type'
+  ].join('\n'));
+  process.exit(0);
+}
+
+if (args.version) {
+  console.log(require('../package.json').version);
+  process.exit(0);
+}
+
 if (args.debug) {
   process.env.HICAT_DEBUG = true;
+  console.log(args);
 }
 
 read.from(args.argv.remain, function (err, files) {
