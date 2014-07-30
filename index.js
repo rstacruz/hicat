@@ -30,6 +30,11 @@ function Hicat (str, options) {
   return str;
 }
 
+/**
+ * Hicat.colors:
+ * The color scheme. You can modify the color scheme if you wish.
+ */
+
 Hicat.colors = {
   keyword: '1',
   built_in: 'keyword',
@@ -52,12 +57,28 @@ Hicat.colors = {
   regexp: '35'
 };
 
+/**
+ * extname : extname(filename)
+ * (private) Extracts the extension from a given `filename`.
+ *
+ *   extname('hi.json')
+ *   => 'json'
+ */
+
 function extname (fname) {
   var m = fname.match(/\.([^\.]+)$/);
   if (m) return m[1];
 }
 
-function color(token) {
+/**
+ * color : color(token)
+ * (private) returns the color for a given token.
+ *
+ *     color('string')
+ *     => '32'
+ */
+
+var color = Hicat.color = function (token) {
   var code = token, newcode;
   while (true) {
     newcode = Hicat.colors[code];
@@ -65,7 +86,16 @@ function color(token) {
     else if (token !== code) return code;
     else return;
   }
-}
+};
+
+/**
+ * html2ansi : html2ansi(str)
+ * (private) Converts hljs-style spans from a given HTML `str` into ANSI
+ * color codes.
+ *
+ *   html2ansi('<span class="hljs-string">"hi"</span>")
+ *   => "\033[31m"hi"\033[0m"
+ */
 
 function html2ansi (str) {
   return str
