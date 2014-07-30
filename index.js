@@ -151,7 +151,7 @@ function html2ansi (str) {
  *   => "\033[32mhello\033[0m"
  */
 
-function colorize(s, color) {
+function colorize (s, color) {
   if (!color) return s;
 
   var reset = "\033[0m",
