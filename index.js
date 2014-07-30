@@ -133,7 +133,7 @@ function html2ansi (str) {
   return str
     .replace(/<span class="hljs-([^"]*)">([^<]*)<\/span>/g, function (_, token, s) {
       var code = color(token);
-      if (process.env.HICAT_DEBUG) s = s + "\033[30m[" + token + "]\033[0m";
+      if (process.env.HICAT_DEBUG) s = s + "\033[0;30m[" + token + "]\033[0m";
       return code ? ("\033[" + code + "m" + s + "\033[0m") : s;
     })
     .replace(/<span class="([^"]*)">/g, '')
