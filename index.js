@@ -52,7 +52,8 @@ Hicat.colors = {
   comment: '33',
   doctype: 'comment',
   pi: 'comment', /* xml declaration */
-  preprocessor: 'comment',
+  preprocessor: 'comment', /* C/C++ preprocessor directives */
+  horizontal_rule: 'comment',  /* markdown HR --- */
 
   string: '32',
   value: 'string', /* html/json values */
