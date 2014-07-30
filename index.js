@@ -50,6 +50,7 @@ Hicat.colors = {
   comment: '33',
   doctype: 'comment',
   pi: 'comment', /* xml declaration */
+  preprocessor: 'comment',
 
   string: '32',
   value: 'string', /* html/json values */
@@ -58,7 +59,9 @@ Hicat.colors = {
   symbol: 'number', /* ruby :symbols */
 
   attribute: '34', /* html/json attributes */
-  literal: 'attribute',
+  literal: 'attribute', /* true, false, etc */
+
+  params: '0',
 
   regexp: '35'
 };
