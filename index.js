@@ -121,7 +121,7 @@ var color = Hicat.color = function (token) {
 };
 
 /**
- * html2ansi : html2ansi(str)
+ * html2ansi() : html2ansi(str)
  * (private) Converts hljs-style spans from a given HTML `str` into ANSI
  * color codes.
  *
@@ -134,13 +134,31 @@ function html2ansi (str) {
     .replace(/<span class="hljs-([^"]*)">([^<]*)<\/span>/g, function (_, token, s) {
       var code = color(token);
       if (process.env.HICAT_DEBUG) s = s + "\033[0;30m[" + token + "]\033[0m";
-      return code ? ("\033[" + code + "m" + s + "\033[0m") : s;
+      return colorize(s, code);
     })
     .replace(/<span class="([^"]*)">/g, '')
     .replace(/<\/span>/g, '')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&amp;/g, '&');
+}
+
+/**
+ * colorize() : colorize(str, color)
+ * Applies the color `color` to the string `str`.
+ *
+ *   colorize("hello", 32)
+ *   => "\033[32mhello\033[0m"
+ */
+
+function colorize(s, color) {
+  if (!color) return s;
+
+  var reset = "\033[0m",
+      code = "\033[" + color + "m";
+
+  if (~s.indexOf("\n")) s = s.replace(/\n/g, "\n"+code);
+  return code + s + reset;
 }
 
 module.exports = Hicat;
