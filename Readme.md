@@ -20,6 +20,8 @@ Installation
 
     $ npm install -g hicat
 
+[![npm version](https://badge.fury.io/js/hicat.svg)](https://npmjs.org/package/hicat "View this project on npm")
+
 Usage:
 
     $ hicat --help
