@@ -59,7 +59,7 @@ Hicat.colors = {
 
   title: '4', /* tags, function names */
 
-  comment: '33',
+  comment: 'GREY',
   doctype: 'comment',
   pi: 'comment', /* xml declaration */
   preprocessor: 'comment', /* C/C++ preprocessor directives */
@@ -78,6 +78,7 @@ Hicat.colors = {
   'function': 'BOLD', /* css function, like rgba() */
   strong: 'function', /* markdown strong */
   link_label: 'strong', /* markdown links */
+
   header: 'BOLDWHITE', /* markdown header */
 
   attribute: 'BLUE', /* html/json attributes */
