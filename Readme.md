@@ -34,6 +34,7 @@ Usage:
           -h, --help         print usage information
           -v, --version      show version info and exit
           -l, --lang LANG    use a given language
+              --languages    list available languages
 
 Thanks
 ------
