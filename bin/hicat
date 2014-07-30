@@ -4,15 +4,17 @@ var args = require('nopt')({
   debug: Boolean,
   version: Boolean,
   languages: Boolean,
-  help: Boolean
+  help: Boolean,
+  page: Boolean
 }, {
   h: '--help',
   v: '--version',
   l: '--lang'
 }, process.argv);
 
-var read = require('../lib/read');
-var hicat = require('../index');
+var read = require('../lib/read'),
+    hicat = require('../index'),
+    term = require('../lib/term');
 
 if (args.help) {
   console.log([
@@ -25,6 +27,7 @@ if (args.help) {
       '    -v, --version      show version info and exit',
       '    -l, --lang TYPE    use a given language',
       '        --languages    list available languages',
+      '        --no-page      disable the pager',
   ].join('\n'));
   process.exit(0);
 }
@@ -36,6 +39,10 @@ if (args.version) {
 
 if (args.debug) {
   process.env.HICAT_DEBUG = true;
+}
+
+if (args.page === false) {
+  process.env.HICAT_NO_PAGER = true;
 }
 
 if (args.languages) {
@@ -57,54 +64,9 @@ read.from(args.argv.remain, function (err, files) {
     if (process.env.HICAT_DEBUG) {
       str += "\nlanguage: " + output.language + "\n";
     }
-    print(str);
+    if (process.env.HICAT_NO_PAGER)
+      process.stdout.write(str);
+    else
+      term.print(str);
   }
 });
-
-/**
- * print() : print(str)
- * Prints the given string `str` to the terminal. If it is too long, it is ran
- * through a pager.
- */
-
-function print (str) {
-  if (!process.env.HICAT_PAGER) {
-    process.stdout.write(str);
-  }
-  else {
-    var count = str.split("\n").length;
-    lines(function (err, max) {
-      if (max && count > max)
-        page(str);
-      else
-        process.stdout.write(str);
-    });
-  }
-}
-
-/**
- * lines() : lines(fn)
- * Returns the number of lines in the terminal.
- *
- *   lines(function (err, n) {
- *     n == 24
- *   });
- */
-
-function lines (fn) {
-  require('child_process').exec('tput lines', function (err, cin, cout) {
-    if (err) fn();
-    else fn(null, +cin);
-  });
-}
-
-/**
- * page() : page(str)
- * Prints the `str` through a pager.
- */
-
-function page (str) {
-  var spawn = require('child_process').spawn;
-  var child = spawn('less', ['-R'], { stdio: [ 'pipe', 1, 2 ] });
-  child.stdin.write(str);
-}

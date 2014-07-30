@@ -43,12 +43,10 @@ Add an alias to your `~/.bashrc` to save a few keystrokes.
 
     alias hi=hicat
 
-Acknowledgements
-----------------
+Btw
+---
 
 [highlight.js] powers the syntax highlighter engine.
-
-[highlight.js]: http://highlightjs.org
 
 Thanks
 ------
@@ -62,3 +60,4 @@ Authored and maintained by Rico Sta. Cruz with help from [contributors].
 
 [MIT License]: http://mit-license.org/
 [contributors]: http://github.com/rstacruz/hicat/contributors
+[highlight.js]: http://highlightjs.org
