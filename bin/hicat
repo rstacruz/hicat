@@ -1,15 +1,18 @@
 #!/usr/bin/env node
+// vim:ft=javascript
+
 var args = require('nopt')({
   lang: String,
   debug: Boolean,
   version: Boolean,
   languages: Boolean,
   help: Boolean,
-  page: Boolean
+  pager: Boolean
 }, {
   h: '--help',
   v: '--version',
-  l: '--lang'
+  l: '--lang',
+  '--no-page': '--no-pager',
 }, process.argv);
 
 var read = require('../lib/read'),
@@ -27,7 +30,7 @@ if (args.help) {
       '    -v, --version      show version info and exit',
       '    -l, --lang TYPE    use a given language',
       '        --languages    list available languages',
-      '        --no-page      disable the pager',
+      '        --no-pager     disable the pager',
   ].join('\n'));
   process.exit(0);
 }
@@ -41,7 +44,7 @@ if (args.debug) {
   process.env.HICAT_DEBUG = true;
 }
 
-if (args.page === false) {
+if (args.pager === false) {
   process.env.HICAT_NO_PAGER = true;
 }
 
