@@ -31,21 +31,22 @@ function Hicat (str, options) {
 }
 
 Hicat.colors = {
+  keyword: '1',
+  built_in: 'keyword',
+
   title: '4',
 
   comment: '33',
 
   string: '32',
+  value: 'string',
+
   number: '33',
 
-  built_in: '1',
-  keyword: '1',
-
-  params: '0',
-  literal: '34',
-  value: '32',
   attribute: '34',
-  regexp: '35',
+  literal: 'attribute',
+
+  regexp: '35'
 };
 
 function extname (fname) {
@@ -53,10 +54,20 @@ function extname (fname) {
   if (m) return m[1];
 }
 
+function color(token) {
+  var code = token, newcode;
+  while (true) {
+    newcode = Hicat.colors[code];
+    if (newcode) code = newcode;
+    else if (token !== code) return code;
+    else return;
+  }
+}
+
 function html2ansi (str) {
   return str
     .replace(/<span class="hljs-([^"]*)">([^<]*)<\/span>/g, function (_, token, s) {
-      var code = Hicat.colors[token];
+      var code = color(token);
       if (process.env.HICAT_DEBUG) s = s + "\033[30m[" + token + "]\033[0m";
       return code ? ("\033[" + code + "m" + s + "\033[0m") : s;
     })
