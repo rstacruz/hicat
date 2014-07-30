@@ -56,12 +56,18 @@ Hicat.colors = {
 
   string: '32',
   value: 'string', /* html/json values */
+  code: 'string', /* markdown code */
+  link_reference: 'string', /* markdown link reference */
 
   number: '33',
   symbol: 'number', /* ruby :symbols */
   hexcolor: 'number', /* css hex holor */
+  link_url: 'number', /* markdown link url */
 
   function: '1', /* css function, like rgba() */
+  strong: 'function', /* markdown strong */
+  link_label: 'strong', /* markdown links */
+  header: '1;37', /* markdown header */
 
   attribute: '34', /* html/json attributes */
   literal: 'attribute', /* true, false, etc */
@@ -69,9 +75,9 @@ Hicat.colors = {
 
   pseudo: '30', /* css pseudoclass :before */
   attr_selector: 'pseudo', /* css attr [type='number'] */
+  blockquote: 'pseudo', /* markdown blockquote */
 
-  params: '0',
-
+  params: '0', /* function parameters () */
   regexp: '35'
 };
 
