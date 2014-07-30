@@ -1,3 +1,7 @@
+## v0.3.1 - July 30, 2014
+
+ * Fix piping not working.
+
 ## v0.3.0 - July 30, 2014
 
  * Automatically page the output if the file is long.
