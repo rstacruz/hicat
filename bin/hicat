@@ -3,6 +3,7 @@ var args = require('nopt')({
   lang: String,
   debug: Boolean,
   version: Boolean,
+  languages: Boolean,
   help: Boolean
 }, {
   h: '--help',
@@ -22,7 +23,8 @@ if (args.help) {
       'Options:',
       '    -h, --help         print usage information',
       '    -v, --version      show version info and exit',
-      '    -l, --lang TYPE    use a given language'
+      '    -l, --lang TYPE    use a given language',
+      '        --languages    list available languages',
   ].join('\n'));
   process.exit(0);
 }
@@ -35,6 +37,11 @@ if (args.version) {
 if (args.debug) {
   process.env.HICAT_DEBUG = true;
   console.log(args);
+}
+
+if (args.languages) {
+  console.log(hicat.listLanguages().sort().join("\n"));
+  process.exit(0);
 }
 
 read.from(args.argv.remain, function (err, files) {
