@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 var args = require('nopt')({
-  type: String,
+  lang: String,
   debug: Boolean,
   version: Boolean,
   help: Boolean
 }, {
   h: '--help',
   v: '--version',
-  t: '--type'
+  l: '--lang'
 }, process.argv);
 
 var read = require('../lib/read');
@@ -22,7 +22,7 @@ if (args.help) {
       'Options:',
       '    -h, --help         print usage information',
       '    -v, --version      show version info and exit',
-      '    -t, --type TYPE    use a given file type'
+      '    -l, --lang TYPE    use a given language'
   ].join('\n'));
   process.exit(0);
 }
@@ -43,7 +43,7 @@ read.from(args.argv.remain, function (err, files) {
   for (var fname in files) {
     if (!files.hasOwnProperty(fname)) continue;
     var data = files[fname];
-    var output = hicat(data, { filename: fname, type: args.type });
+    var output = hicat(data, { filename: fname, lang: args.lang });
     process.stdout.write(output);
   }
 });

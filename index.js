@@ -9,13 +9,13 @@ var hljs = require('highlight.js');
  * Options available:
  *
  * ~ filename (string): Filename
- * ~ type (string): File type
+ * ~ lang (string): Language to use
  */
 
 function Hicat (str, options) {
   if (!options) options = {};
-  var ext = options.type || (options.filename && extname(options.filename));
-  if (ext) {
+  var lang = options.lang || (options.filename && extname(options.filename));
+  if (lang) {
     try {
       str = hljs.highlight(ext, str).value;
     } catch (e) {
@@ -56,6 +56,13 @@ Hicat.colors = {
 
   regexp: '35'
 };
+
+/**
+ * Hicat.listLanguages():
+ * Returns a list of supported languages.
+ */
+
+Hicat.listLanguages = hljs.listLanguages;
 
 /**
  * extname : extname(filename)
