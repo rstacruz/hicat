@@ -15,6 +15,8 @@ If hicat fails to detect a language, specify it using `-l LANG`.
 
     curl http://site.com | hicat -l xml
 
+[![Status](https://travis-ci.org/rstacruz/hicat.svg?branch=master)](https://travis-ci.org/rstacruz/hicat)  
+
 Installation
 ------------
 
