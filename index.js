@@ -65,7 +65,7 @@ Hicat.colors = {
   hexcolor: 'number', /* css hex holor */
   link_url: 'number', /* markdown link url */
 
-  function: '1', /* css function, like rgba() */
+  'function': '1', /* css function, like rgba() */
   strong: 'function', /* markdown strong */
   link_label: 'strong', /* markdown links */
   header: '1;37', /* markdown header */
