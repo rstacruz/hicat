@@ -37,7 +37,7 @@ Usage:
           -v, --version      show version info and exit
           -l, --lang LANG    use a given language
               --languages    list available languages
-              --no-page      disable the pager
+              --no-pager     disable the pager
 
 Tips and tricks
 ---------------

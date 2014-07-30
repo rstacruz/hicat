@@ -19,6 +19,24 @@ var read = require('../lib/read'),
     hicat = require('../index'),
     term = require('../lib/term');
 
+/**
+ * --debug: display detailed information.
+ */
+
+if (args.debug)
+  process.env.HICAT_DEBUG = true;
+
+/**
+ * --no-pager: don't pass the output to `less`.
+ */
+
+if (args.pager === false)
+  process.env.HICAT_NO_PAGER = true;
+
+/**
+ * --help: display help usage.
+ */
+
 if (args.help) {
   console.log([
       'Usage:',
@@ -40,18 +58,31 @@ if (args.version) {
   process.exit(0);
 }
 
-if (args.debug) {
-  process.env.HICAT_DEBUG = true;
-}
-
-if (args.pager === false) {
-  process.env.HICAT_NO_PAGER = true;
-}
+/**
+ * --languages: list languages.
+ */
 
 if (args.languages) {
   console.log(hicat.listLanguages().sort().join("\n"));
   process.exit(0);
 }
+
+/**
+ * --list-colors: display the color scheme used.
+ * Undocumented for now, but will be configurable soon.
+ */
+
+if (args['list-colors']) {
+  Object.keys(hicat.colors).forEach(function (key) {
+    var val = hicat.colors[key];
+    console.log(key + "=" + val);
+  });
+  process.exit(0);
+}
+
+/*
+ * Read files from stdin or from the given files.
+ */
 
 read.from(args.argv.remain, function (err, files) {
   if (err) {
