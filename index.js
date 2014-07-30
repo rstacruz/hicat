@@ -44,6 +44,8 @@ function Hicat (str, options) {
 Hicat.colors = {
   keyword: '1',
   built_in: 'keyword',
+  tag: 'keyword', /* css tag */
+  class: 'keyword', /* css class */
 
   title: '4', /* tags, function names */
 
@@ -57,9 +59,16 @@ Hicat.colors = {
 
   number: '33',
   symbol: 'number', /* ruby :symbols */
+  hexcolor: 'number', /* css hex holor */
+
+  function: '1', /* css function, like rgba() */
 
   attribute: '34', /* html/json attributes */
   literal: 'attribute', /* true, false, etc */
+  variable: 'attribute', /* xml variable */
+
+  pseudo: '30', /* css pseudoclass :before */
+  attr_selector: 'pseudo', /* css attr [type='number'] */
 
   params: '0',
 
