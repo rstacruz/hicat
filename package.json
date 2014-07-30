@@ -2,7 +2,7 @@
   "name": "hicat",
   "author": "Rico Sta. Cruz <hi@ricostacruz.com>",
   "license": "MIT",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Command-line syntax highlighter.",
   "main": "index.js",
   "scripts": {
