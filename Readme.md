@@ -1,7 +1,6 @@
-hicat
-=====
+# hicat :cat:
 
-<img src="http://ricostacruz.com/hicat/hicat.gif" align="right">
+<img src="http://ricostacruz.com/hicat/hicat.gif">
 
 `cat` with syntax highlighting. Auto-detects the language via the file 
 extension, or tries to infer it automatically.
