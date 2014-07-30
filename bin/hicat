@@ -53,10 +53,58 @@ read.from(args.argv.remain, function (err, files) {
     if (!files.hasOwnProperty(fname)) continue;
     var data = files[fname];
     var output = hicat(data, { filename: fname, lang: args.lang });
-    process.stdout.write(output.ansi);
+    var str = output.ansi;
     if (process.env.HICAT_DEBUG) {
-      console.log({ language: output.language });
+      str += "\nlanguage: " + output.language + "\n";
     }
+    print(str);
   }
 });
 
+/**
+ * print() : print(str)
+ * Prints the given string `str` to the terminal. If it is too long, it is ran
+ * through a pager.
+ */
+
+function print (str) {
+  if (!process.env.HICAT_PAGER) {
+    process.stdout.write(str);
+  }
+  else {
+    var count = str.split("\n").length;
+    lines(function (err, max) {
+      if (max && count > max)
+        page(str);
+      else
+        process.stdout.write(str);
+    });
+  }
+}
+
+/**
+ * lines() : lines(fn)
+ * Returns the number of lines in the terminal.
+ *
+ *   lines(function (err, n) {
+ *     n == 24
+ *   });
+ */
+
+function lines (fn) {
+  require('child_process').exec('tput lines', function (err, cin, cout) {
+    if (err) fn();
+    else fn(null, +cin);
+  });
+}
+
+/**
+ * page() : page(str)
+ * Prints the `str` through a pager.
+ */
+
+function page (str) {
+  var spawn = require('child_process').spawn;
+  var child = spawn('less', ['-R'], { stdio: [ 'pipe', 1, 2 ] });
+  child.stdin.write(str);
+}
