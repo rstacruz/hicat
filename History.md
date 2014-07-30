@@ -1,4 +1,4 @@
-## v0.2.1 - July 30, 2014
+## v0.2.2 - July 30, 2014
 
  * Fix `--lang` not working properly.
 
