@@ -1,6 +1,8 @@
 hicat
 =====
 
+<img src="http://ricostacruz.com/hicat/hicat.gif" align="right">
+
 `cat` with syntax highlighting. Auto-detects the language via the file 
 extension, or tries to infer it automatically.
 
