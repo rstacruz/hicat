@@ -1,3 +1,8 @@
+## v0.3.0 - July 30, 2014
+
+ * Automatically page the output if the file is long.
+ * Throw less-verbose error messages.
+
 ## v0.2.3 - July 30, 2014
 
  * Add colors for Markdown files.
