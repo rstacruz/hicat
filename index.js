@@ -42,7 +42,17 @@ function Hicat (str, options) {
  */
 
 Hicat.colors = {
-  keyword: '1',
+  // aliases
+  GREY: '30',
+  RED: '31',
+  GREEN: '32',
+  YELLOW: '33',
+  BLUE: '34',
+  MAGENTA: '35',
+  BOLD: '1',
+  BOLDWHITE: '1;37',
+
+  keyword: 'BOLD',
   built_in: 'keyword',
   tag: 'keyword', /* css tag */
   class: 'keyword', /* css class */
@@ -55,31 +65,35 @@ Hicat.colors = {
   preprocessor: 'comment', /* C/C++ preprocessor directives */
   horizontal_rule: 'comment',  /* markdown HR --- */
 
-  string: '32',
+  string: 'GREEN',
   value: 'string', /* html/json values */
   code: 'string', /* markdown code */
   link_reference: 'string', /* markdown link reference */
 
-  number: '33',
+  number: 'YELLOW',
   symbol: 'number', /* ruby :symbols */
   hexcolor: 'number', /* css hex holor */
   link_url: 'number', /* markdown link url */
 
-  'function': '1', /* css function, like rgba() */
+  'function': 'BOLD', /* css function, like rgba() */
   strong: 'function', /* markdown strong */
   link_label: 'strong', /* markdown links */
-  header: '1;37', /* markdown header */
+  header: 'BOLDWHITE', /* markdown header */
 
-  attribute: '34', /* html/json attributes */
+  attribute: 'BLUE', /* html/json attributes */
   literal: 'attribute', /* true, false, etc */
   variable: 'attribute', /* xml variable */
 
-  pseudo: '30', /* css pseudoclass :before */
+  pseudo: 'GREY', /* css pseudoclass :before */
   attr_selector: 'pseudo', /* css attr [type='number'] */
   blockquote: 'pseudo', /* markdown blockquote */
 
   params: '0', /* function parameters () */
-  regexp: '35'
+  regexp: 'MAGENTA',
+
+  addition: 'GREEN', /* diff + */
+  deletion: 'RED',   /* diff - */
+  chunk: 'BLUE',     /* diff @@ -1,119 +1,768 @@ */
 };
 
 /**
