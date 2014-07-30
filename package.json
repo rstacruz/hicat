@@ -1,7 +1,9 @@
 {
   "name": "hicat",
+  "author": "Rico Sta. Cruz <hi@ricostacruz.com>",
+  "license": "MIT",
   "version": "0.0.0",
-  "description": "",
+  "description": "CLI syntax highlighter.",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -9,8 +11,6 @@
   "bin": {
     "hicat": "./bin/hicat"
   },
-  "author": "Rico Sta. Cruz <hi@ricostacruz.com>",
-  "license": "MIT",
   "dependencies": {
     "highlight.js": "^8.1.0",
     "nopt": "^3.0.1"
