@@ -32,10 +32,6 @@ describe('--version', function () {
   run('--version');
   success();
 
-  it('is successful', function () {
-    expect(exit).eql(null);
-  });
-
   it('shows version info', function () {
     expect(cout).include(require('../package.json').version);
   });
@@ -45,10 +41,6 @@ describe('-v', function () {
   run('-v');
   success();
 
-  it('is successful', function () {
-    expect(exit).eql(null);
-  });
-
   it('shows version info', function () {
     expect(cout).include(require('../package.json').version);
   });
@@ -57,10 +49,6 @@ describe('-v', function () {
 describe('a ruby example', function () {
   run('samples/ruby.rb --no-pager');
   success();
-
-  it('is successful', function () {
-    expect(exit).eql(null);
-  });
 
   it('highlights', function () {
     expect(cout).match(/method/);

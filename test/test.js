@@ -93,4 +93,10 @@ describe('Hicat.color', function () {
     hicat.colors = { string: '70', str: 'string', s: 'str' };
     expect(hicat.color('s')).eql('70');
   });
+
+  it('accounts for languages', function () {
+    hicat.colors = { val: '20', 'json:val': '30' };
+    expect(hicat.color('val')).eql('20');
+    expect(hicat.color('json:val')).eql('30');
+  });
 });
