@@ -84,26 +84,32 @@ if (args['list-colors']) {
  * Read files from stdin or from the given files.
  */
 
+var exit = 0;
+var str = '';
+
 read.from(args.argv.remain, function (err, files) {
-  if (err) {
-    console.error(err.message);
-    process.exit(8);
-  }
-
-  var str = '';
-
-  for (var fname in files) {
-    if (!files.hasOwnProperty(fname)) continue;
-    var data = files[fname];
-    var output = hicat(data, { filename: fname, lang: args.lang });
-    str += output.ansi;
-    if (process.env.HICAT_DEBUG) {
-      str += "\nlanguage: " + output.language + "\n";
+  files.forEach(function (f) {
+    if (f.error) {
+      console.error(f.file + ": " + f.error.message);
+      exit = 8;
+    } else {
+      var output = hicat(f.data, { filename: f.file, lang: args.lang });
+      str += output.ansi;
+      if (process.env.HICAT_DEBUG) {
+        str += "\nlanguage: " + output.language + "\n";
+      }
     }
-  }
+  });
 
-  if (process.env.HICAT_NO_PAGER || files['-'])
+  // check if it's stdin
+  var stdin = files && files[0] && files[0].stdin;
+
+  // don't use the pager on --no-pager, piping, or non-0 exit codes
+  if (process.env.HICAT_NO_PAGER || stdin || exit)
     process.stdout.write(str);
   else
     term.print(str);
+
+  process.exit(exit);
 });
+
