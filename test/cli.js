@@ -72,6 +72,15 @@ describe('a ruby example', function () {
   });
 });
 
+describe('a ruby example with --debug', function () {
+  run('samples/ruby.rb --debug');
+  success();
+
+  it('highlights tags', function () {
+    expect(result.out).match(/\[string\].*\[\/string\]/);
+  });
+});
+
 describe('not found', function () {
   run('xxx yyy zzz --no-pager');
 
