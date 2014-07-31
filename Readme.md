@@ -46,6 +46,10 @@ Add an alias to your `~/.bashrc` to save a few keystrokes.
 
     alias hi=hicat
 
+If you want to replace `cat` completely, you can also use:
+
+    alias cat=hicat
+
 Btw
 ---
 
