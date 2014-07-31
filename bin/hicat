@@ -94,11 +94,8 @@ read.from(args.argv.remain, function (err, files) {
       console.error(f.file + ": " + f.error.message);
       exit = 8;
     } else {
-      var output = hicat(f.data, { filename: f.file, lang: args.lang });
+      var output = hicat(f.data, { filename: f.file, lang: args.lang, debug: process.env.HICAT_DEBUG });
       str += output.ansi;
-      if (process.env.HICAT_DEBUG) {
-        str += "\nlanguage: " + output.language + "\n";
-      }
     }
   });
 

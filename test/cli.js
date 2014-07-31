@@ -79,6 +79,11 @@ describe('a ruby example with --debug', function () {
   it('highlights tags', function () {
     expect(result.out).match(/\[string\].*\[\/string\]/);
   });
+
+  it('tells the language', function () {
+    var strip = result.out.replace(/\033[^m]*m/g, '');
+    expect(strip).include('hicat language: rb');
+  });
 });
 
 describe('not found', function () {
