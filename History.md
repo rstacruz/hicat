@@ -1,3 +1,7 @@
+## v0.4.1 - July 31, 2014
+
+ * JSON: prevent symbols (`{ }`) from being colorized as green.
+
 ## v0.4.0 - July 31, 2014
 
  * Add colors for javadoc comments.
