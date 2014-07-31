@@ -1,3 +1,9 @@
+## v0.4.0 - July 31, 2014
+
+ * Add colors for javadoc comments.
+ * Add support for Ruby string interpolation.
+ * Internal refactors to tests, color schemes, and many others.
+
 ## v0.3.2 - July 31, 2014
 
  * Add colors for diffs (`--lang diff`).
