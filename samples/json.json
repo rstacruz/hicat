@@ -1,0 +1,10 @@
+{
+  "name": "hicat",
+  "license": "MIT",
+  "description": "Command-line syntax highlighter.",
+  "main": "index.js",
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.21.3"
+  }
+}

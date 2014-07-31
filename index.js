@@ -27,7 +27,7 @@ function Hicat (str, options) {
   }
 
   if (!out || !out.value) throw new Error("failed to highlight");
-  out.ansi = html2ansi(out.value);
+  out.ansi = html2ansi(out.value, out.language);
   return {
     ansi: out.ansi,
     language: out.language,
@@ -69,20 +69,29 @@ function extname (fname) {
  *
  *     color('string')
  *     => '32'
+ *     color('attribute', 'json')
+ *     => '32'
  */
 
-var color = Hicat.color = function (token) {
-  var code = token, newcode;
-  while (true) {
-    newcode = Hicat.colors[code];
-    if (newcode) code = newcode;
-    else if (token !== code) return code;
-    else return;
+var color = Hicat.color = function (token, lang) {
+  if (lang)
+    return getColor(lang + ':' + token) || getColor(token);
+  else
+    return getColor(token);
+
+  function getColor (token) {
+    var code = token, newcode;
+    while (true) {
+      newcode = Hicat.colors[code];
+      if (newcode) code = newcode;
+      else if (token !== code) return code;
+      else return;
+    }
   }
 };
 
 /**
- * html2ansi() : html2ansi(str)
+ * html2ansi() : html2ansi(str, lang)
  * (private) Converts hljs-style spans from a given HTML `str` into ANSI
  * color codes.
  *
@@ -90,10 +99,10 @@ var color = Hicat.color = function (token) {
  *   => "\033[31m"hi"\033[0m"
  */
 
-function html2ansi (str) {
+function html2ansi (str, lang) {
   // do multiple passes as spans can be multiple
   while (~str.indexOf('<span class="hljs-')) {
-    str = replaceSpan(str);
+    str = replaceSpan(str, lang);
   }
 
   return str
@@ -104,10 +113,10 @@ function html2ansi (str) {
     .replace(/&amp;/g, '&');
 }
 
-function replaceSpan (str) {
+function replaceSpan (str, lang) {
   return str
     .replace(/<span class="hljs-([^"]*)">([^<]*)<\/span>/g, function (_, token, s) {
-      var code = color(token);
+      var code = color(token, lang);
       if (process.env.HICAT_DEBUG) {
         s = s + "\033[0;30m[/" + token + "]\033[0m";
         return "\033[0;30m[" + token + "]\033[0m" + colorize(s, code);
