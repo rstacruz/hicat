@@ -1,11 +1,13 @@
 var hljs = require('highlight.js');
 var colorize;
 
-/**
- * Hicat() : Hicat(str, options)
+/***
+ * hicat() : hicat(str, options)
  * Highlights a given `str` string.
  *
- *   Hicat("echo 'hi'", { filename: 'script.sh' })
+ *   var hicat = require('hicat');
+ *   hicat("echo 'hi'", { filename: 'script.sh' })
+ *   => "echo \033[32m'hi'\033[0m"
  *
  * Options available:
  *
@@ -14,7 +16,7 @@ var colorize;
  * ~ debug (Boolean): set to `true` for extra info
  */
 
-function Hicat (str, options) {
+function hicat (str, options) {
   if (!options) options = {};
 
   var lang = options.lang || (options.filename && extname(options.filename));
@@ -49,21 +51,21 @@ function Hicat (str, options) {
 }
 
 /**
- * colors: Hicat.colors
- * The color scheme. This is a key-value object that `Hicat.color()` refers to.
+ * colors : hicat.colors
+ * The color scheme. This is a key-value object that `hicat.color()` refers to.
  */
 
-Hicat.colors = require('./lib/colors');
+hicat.colors = require('./lib/colors');
 
 /**
- * listLanguages(): Hicat.listLanguages()
+ * listLanguages() : hicat.listLanguages()
  * Returns a list of supported languages.
  *
  *   listLanguages()
  *   => ['javascript', 'python', 'c', ...]
  */
 
-Hicat.listLanguages = hljs.listLanguages;
+hicat.listLanguages = hljs.listLanguages;
 
 /**
  * extname() : extname(filename)
@@ -79,7 +81,7 @@ function extname (fname) {
 }
 
 /**
- * color() : Hicat.color(token)
+ * color() : hicat.color(token)
  * Returns the color for a given token.
  *
  *     color('string')
@@ -88,7 +90,7 @@ function extname (fname) {
  *     => '32'
  */
 
-var color = Hicat.color = function (token, lang) {
+var color = hicat.color = function (token, lang) {
   if (lang)
     return getColor(lang + ':' + token) || getColor(token);
   else
@@ -97,7 +99,7 @@ var color = Hicat.color = function (token, lang) {
   function getColor (token) {
     var code = token, newcode;
     while (true) {
-      newcode = Hicat.colors[code];
+      newcode = hicat.colors[code];
       if (newcode) code = newcode;
       else if (token !== code) return code;
       else return;
@@ -132,7 +134,7 @@ function html2ansi (str, options) {
 }
 
 /**
- * replaceSpan(): replaceSpan(html, options)
+ * replaceSpan() : replaceSpan(html, options)
  * (private) Replaces span tags with ANSI codes in the given `html` string.
  * A delegate of `html2ansi`.
  *
@@ -156,14 +158,14 @@ function replaceSpan (str, options) {
 }
 
 /**
- * colorize() : Hicat.colorize(str, color)
+ * colorize() : hicat.colorize(str, color)
  * Applies the color `color` to the string `str`.
  *
  *   colorize("hello", 32)
  *   => "\033[32mhello\033[0m"
  */
 
-colorize = Hicat.colorize = function (s, color) {
+colorize = hicat.colorize = function (s, color) {
   if (!color) return s;
 
   var reset = "\033[0m",
@@ -180,4 +182,4 @@ colorize = Hicat.colorize = function (s, color) {
   return code + s + reset;
 };
 
-module.exports = Hicat;
+module.exports = hicat;
