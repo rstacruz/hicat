@@ -45,6 +45,23 @@ describe('-v', function () {
   });
 });
 
+describe('--list-colors', function () {
+  run('--list-colors');
+  success();
+
+  it('has color constants', function () {
+    expect(result.out).match(/RED=[0-9;]+/);
+    expect(result.out).match(/GREEN=[0-9;]+/);
+    expect(result.out).match(/BLUE=[0-9;]+/);
+    expect(result.out).match(/CYAN=[0-9;]+/);
+    expect(result.out).match(/YELLOW=[0-9;]+/);
+  });
+
+  it('has "value"', function () {
+    expect(result.out).match(/value=.*/);
+  });
+});
+
 describe('a ruby example', function () {
   run('samples/ruby.rb --no-pager');
   success();
