@@ -65,11 +65,11 @@ describe('A simple example', function() {
   });
 
   it('highlights numbers', function () {
-    expect(str).include('\033[33m2\033[0m');
+    expect(str).include('\033[0;33m2\033[0');
   });
 
   it('highlights comments', function () {
-    expect(str).include('\033[30m/*yo*/\033[0m');
+    expect(str).include('\033[0;30m/*yo*/\033[0m');
   });
 });
 
