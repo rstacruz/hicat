@@ -110,6 +110,6 @@ read.from(args.argv.remain, function (err, files) {
   else
     term.print(str);
 
-  process.exit(exit);
+  if (exit > 0) process.exit(exit);
 });
 
