@@ -3,6 +3,7 @@
  * Add colors for javadoc comments.
  * Add support for Ruby string interpolation.
  * Internal refactors to tests, color schemes, and many others.
+ * Make the output of the undocumented `--debug` switch more useful.
 
 ## v0.3.2 - July 31, 2014
 
