@@ -1,6 +1,5 @@
-var expect = require('chai').expect,
-    hicat = require('../index'),
-    extend = require('util')._extend;
+require('./setup');
+var extend = require('util')._extend;
 
 describe('Hicat the module', function() {
   it('is a function', function () {
