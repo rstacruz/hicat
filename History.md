@@ -1,3 +1,9 @@
+## v0.5.0 - July 31, 2014
+
+ * Change comment color to cyan.
+ * Add colors for javadoc tags.
+ * (Internal) documentations and tests.
+
 ## v0.4.1 - July 31, 2014
 
  * JSON: prevent symbols (`{ }`) from being colorized as green.
@@ -6,8 +12,8 @@
 
  * Add colors for javadoc comments.
  * Add support for Ruby string interpolation.
- * Internal refactors to tests, color schemes, and many others.
  * Make the output of the undocumented `--debug` switch more useful.
+ * (Internal) Refactors to tests, color schemes, and many others.
 
 ## v0.3.2 - July 31, 2014
 

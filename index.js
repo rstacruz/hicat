@@ -1,4 +1,5 @@
 var hljs = require('highlight.js');
+var colorize;
 
 /**
  * Hicat() : Hicat(str, options)
@@ -116,6 +117,16 @@ function html2ansi (str, lang) {
     .replace(/&amp;/g, '&');
 }
 
+/**
+ * replaceSpan(): replaceSpan(html, lang)
+ * (private) Replaces span tags with ANSI codes in the given `html` string.
+ * A delegate of `html2ansi`.
+ *
+ *   html = '<span class="hljs-tag">hi</span>'
+ *   replaceSpan(html, 'java')
+ *   => "\033[0;32mhi\033[0m"
+ */
+
 function replaceSpan (str, lang) {
   return str
     .replace(/<span class="hljs-([^"]*)">([^<]*)<\/span>/g, function (_, token, s) {
@@ -131,14 +142,14 @@ function replaceSpan (str, lang) {
 }
 
 /**
- * colorize() : colorize(str, color)
+ * colorize() : Hicat.colorize(str, color)
  * Applies the color `color` to the string `str`.
  *
  *   colorize("hello", 32)
  *   => "\033[32mhello\033[0m"
  */
 
-function colorize (s, color) {
+colorize = Hicat.colorize = function (s, color) {
   if (!color) return s;
 
   var reset = "\033[0m",
@@ -153,6 +164,6 @@ function colorize (s, color) {
   }
 
   return code + s + reset;
-}
+};
 
 module.exports = Hicat;

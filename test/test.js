@@ -42,7 +42,7 @@ describe('A simple example', function() {
   var str, out, input;
 
   beforeEach(function () {
-    input = 'var x = 2 + "hi"; /*yo*/';
+    input = 'var x = 2345 + "hi"; /*yo*/';
     out = hicat(input);
     str = out.ansi;
   });
@@ -65,11 +65,13 @@ describe('A simple example', function() {
   });
 
   it('highlights numbers', function () {
-    expect(str).include('\033[0;33m2\033[0');
+    var fragment = hicat.colorize('2345', hicat.color('number', 'haxe'));
+    expect(str).include(str);
   });
 
   it('highlights comments', function () {
-    expect(str).include('\033[0;30m/*yo*/\033[0m');
+    var fragment = hicat.colorize('/*yo*/', hicat.color('comment', 'haxe'));
+    expect(str).include(fragment);
   });
 });
 
@@ -98,5 +100,13 @@ describe('Hicat.color', function () {
     hicat.colors = { val: '20', 'json:val': '30' };
     expect(hicat.color('val')).eql('20');
     expect(hicat.color('json:val')).eql('30');
+  });
+
+});
+
+describe('Hicat.colorize', function () {
+  it('works', function () {
+    var fragment = hicat.colorize('yo', '32');
+    expect(fragment).eql('\033[32m' + 'yo' + '\033[0m');
   });
 });
