@@ -38,7 +38,7 @@ function Hicat (str, options) {
 
 /**
  * Hicat.colors:
- * The color scheme. You can modify the color scheme if you wish.
+ * The color scheme. This is a key-value object that `Hicat.color()` refers to.
  */
 
 Hicat.colors = require('./lib/colors');
@@ -46,6 +46,9 @@ Hicat.colors = require('./lib/colors');
 /**
  * Hicat.listLanguages():
  * Returns a list of supported languages.
+ *
+ *   listLanguages()
+ *   => ['javascript', 'python', 'c', ...]
  */
 
 Hicat.listLanguages = hljs.listLanguages;
