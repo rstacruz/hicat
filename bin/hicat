@@ -7,7 +7,8 @@ var args = require('nopt')({
   version: Boolean,
   languages: Boolean,
   help: Boolean,
-  pager: Boolean
+  pager: Boolean,
+  html: Boolean,
 }, {
   h: '--help',
   v: '--version',
