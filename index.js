@@ -118,8 +118,10 @@ function replaceSpan (str, lang) {
     .replace(/<span class="hljs-([^"]*)">([^<]*)<\/span>/g, function (_, token, s) {
       var code = color(token, lang);
       if (process.env.HICAT_DEBUG) {
-        s = s + "\033[0;30m[/" + token + "]\033[0m";
-        return "\033[0;30m[" + token + "]\033[0m" + colorize(s, code);
+        return "" +
+          colorize("[" + token + "]", color('tag', 'debug')) +
+          colorize(s, code) +
+          colorize("[/" + token + "]", color('tag', 'debug'));
       }
       return colorize(s, code);
     });
