@@ -1,30 +1,29 @@
-var exec = require('child_process').exec;
-var cout, cerr, exit;
+var run = require('./cli_helpers').run,
+    pipe = require('./cli_helpers').pipe;
+    success = require('./cli_helpers').success;
 
-function run (args) {
-  beforeEach(function (next) {
-    exec('./bin/hicat ' + args, function (_exit, _cout, _cerr) {
-      exit = _exit;
-      cout = _cout;
-      cerr = _cerr;
-      next();
-    });
-  });
-}
+describe('pipe', function () {
 
-function success () {
-  it('is successful', function () {
-    expect(exit).eql(null);
+  var input = 'var x = 2';
+  pipe(input);
+  success();
+
+  it('has no stderr', function () {
+    expect(result.stderr).eql('');
   });
-}
+
+  it('has results', function () {
+    expect(result.out).eql(hicat(input).ansi);
+  });
+});
 
 describe('--help', function () {
   run('--help');
   success();
 
   it('shows --help', function () {
-    expect(cout).include('-h, --help');
-    expect(cout).include('print usage information');
+    expect(result.out).include('-h, --help');
+    expect(result.out).include('print usage information');
   });
 });
 
@@ -33,7 +32,7 @@ describe('--version', function () {
   success();
 
   it('shows version info', function () {
-    expect(cout).include(require('../package.json').version);
+    expect(result.out).include(require('../package.json').version);
   });
 });
 
@@ -42,7 +41,7 @@ describe('-v', function () {
   success();
 
   it('shows version info', function () {
-    expect(cout).include(require('../package.json').version);
+    expect(result.out).include(require('../package.json').version);
   });
 });
 
@@ -51,8 +50,8 @@ describe('a ruby example', function () {
   success();
 
   it('highlights', function () {
-    expect(cout).match(/method/);
-    expect(cout).match(/string/);
+    expect(result.out).match(/method/);
+    expect(result.out).match(/string/);
   });
 });
 
@@ -60,17 +59,17 @@ describe('not found', function () {
   run('xxx yyy zzz --no-pager');
 
   it('fails', function () {
-    expect(exit.code).eql(8);
+    expect(result.code).eql(8);
   });
 
   it('does no output', function () {
-    expect(cout).eql('');
+    expect(result.out).eql('');
   });
 
   it('reports errors', function () {
-    expect(cerr).match(/xxx/);
-    expect(cerr).match(/yyy/);
-    expect(cerr).match(/zzz/);
-    expect(cerr).match(/no such file or directory/);
+    expect(result.stderr).match(/xxx/);
+    expect(result.stderr).match(/yyy/);
+    expect(result.stderr).match(/zzz/);
+    expect(result.stderr).match(/no such file or directory/);
   });
 });
