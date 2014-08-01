@@ -1,3 +1,5 @@
+require('./setup');
+
 var run = require('./cli_helpers').run,
     pipe = require('./cli_helpers').pipe;
     success = require('./cli_helpers').success;
@@ -42,6 +44,16 @@ describe('-v', function () {
 
   it('shows version info', function () {
     expect(result.out).include(require('../package.json').version);
+  });
+});
+
+describe('--languages', function () {
+  run('--languages');
+  success();
+
+  it('has color constants', function () {
+    var out = hicat.listLanguages().sort().join('\n');
+    expect(result.out.trim()).eql(out);
   });
 });
 
