@@ -84,6 +84,24 @@ describe('a ruby example', function () {
   });
 });
 
+describe('coercing via --lang', function () {
+  run('samples/ruby.rb --no-pager --lang markdown --debug');
+  success();
+
+  it('works', function () {
+    expect(result.out).match(/language: markdown/);
+  });
+});
+
+describe('coercing via -l', function () {
+  run('samples/ruby.rb --no-pager -l markdown --debug');
+  success();
+
+  it('works', function () {
+    expect(result.out).match(/language: markdown/);
+  });
+});
+
 describe('a ruby example with --debug', function () {
   run('samples/ruby.rb --debug');
   success();
