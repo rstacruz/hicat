@@ -3,30 +3,34 @@ var expect = require('chai').expect;
 var read = require('../lib/read');
 
 describe('read.files', function () {
-  var data;
+  var res;
 
   beforeEach(function (next) {
-    read.files(['./test/read.js', './foo'], function (err, _data) {
+    read(['./test/read.js', './foo'], function (err, _res) {
       expect(err).falsy;
-      data = _data;
+      res = _res;
       next();
     });
   });
 
   it('returns .files', function () {
-    expect(data.files).array;
-    expect(data.files).have.length(2);
+    expect(res.files).array;
+    expect(res.files).have.length(2);
   });
 
-  it('gives data', function () {
-    var file = data.files[0];
+  it('concatenates res', function () {
+    expect(res.data).eql(res.files[0].data);
+  });
+
+  it('gives res', function () {
+    var file = res.files[0];
     expect(file.data).a('string');
     expect(file.data).match(/Hola mundo/);
-    expect(file.file).eql('./test/read.js');
+    expect(file.name).eql('./test/read.js');
   });
 
   it('gives errors', function () {
-    var file = data.files[1];
+    var file = res.files[1];
     expect(file.error).instanceOf(Error);
     expect(file.error.code).eql('ENOENT');
   });

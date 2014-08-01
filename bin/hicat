@@ -82,14 +82,14 @@ if (args['list-colors']) {
 var exit = 0;
 var str = '';
 
-read.files(args._, function (err, data) {
+read(args._, function (err, data) {
   var files = data.files;
   files.forEach(function (f) {
     if (f.error) {
       console.error(f.file + ": " + f.error.message);
       exit = 8;
     } else {
-      var output = hicat(f.data, { filename: f.file, lang: args.lang, debug: process.env.HICAT_DEBUG });
+      var output = hicat(f.data, { filename: f.name, lang: args.lang, debug: process.env.HICAT_DEBUG });
       str += output.ansi;
     }
   });
