@@ -82,7 +82,8 @@ if (args['list-colors']) {
 var exit = 0;
 var str = '';
 
-read.from(args._, function (err, files) {
+read.files(args._, function (err, data) {
+  var files = data.files;
   files.forEach(function (f) {
     if (f.error) {
       console.error(f.file + ": " + f.error.message);
