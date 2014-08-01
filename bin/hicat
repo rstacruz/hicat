@@ -50,6 +50,7 @@ if (args.help) {
       '    -l, --lang TYPE    use a given language',
       '        --languages    list available languages',
       '        --no-pager     disable the pager',
+      '        --debug        show verbose info',
   ].join('\n'));
   process.exit(0);
 }
