@@ -4,6 +4,9 @@
 var args = require('minimist')(process.argv.slice(2), {
   string: 'lang',
   boolean: 'pager',
+  default: {
+    pager: true,
+  },
   alias: {
     h: 'help', v: 'version', l: 'lang', page: 'pager'
   }
