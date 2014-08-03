@@ -1,3 +1,7 @@
+## v0.5.1 - August 3, 2014
+
+ * Fix the pager not being on by default.
+
 ## v0.5.0 - July 31, 2014
 
  * Change comment color to cyan.
