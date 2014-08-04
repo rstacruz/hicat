@@ -1,3 +1,7 @@
+## v0.6.0 - August 4, 2014
+
+ * Add the `--numbers` option for line numbers.
+
 ## v0.5.1 - August 3, 2014
 
  * Fix the pager not being on by default.
