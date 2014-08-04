@@ -44,10 +44,13 @@ function hicat (str, options) {
   // Add line numbers
   if (options.numbers) {
     var i = 0;
-    var digits = (""+out.ansi.split("\n").length).length;
+    var lines = out.value.split("\n").length;
+    var digits = (""+lines).length;
     if (digits < 3) digits = 3;
     out.ansi = out.ansi.replace(/^/gm, function (s) {
       i++;
+      if (i >= lines) return s;
+
       var pad = digits - (""+i).length;
       var prefix = Array(pad+1).join(" ") + i + ' ';
       prefix = colorize(prefix, color('line_number'));
