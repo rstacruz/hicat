@@ -41,13 +41,6 @@ function hicat (str, options) {
     debug: options.debug
   });
 
-  // Add language comment
-  if (options.debug) {
-    var info = "/* hicat language: " + out.language + " */";
-    info = colorize(info, color('tag', 'debug'));
-    out.ansi += "\n\n" + info + "\n";
-  }
-
   // Add line numbers
   if (options.numbers) {
     var i = 0;
@@ -60,6 +53,13 @@ function hicat (str, options) {
       prefix = colorize(prefix, color('line_number'));
       return prefix + s;
     });
+  }
+
+  // Add language comment
+  if (options.debug) {
+    var info = "/* hicat language: " + out.language + " */";
+    info = colorize(info, color('tag', 'debug'));
+    out.ansi += "\n\n" + info + "\n";
   }
 
   return {
