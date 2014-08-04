@@ -19,6 +19,7 @@ exports.run = function (args) {
         code: _exit && _exit.code || 0,
         error: _exit,
         out: _cout,
+        stripped: _cout.replace(/\033\[[^m]*m/g, ''),
         stderr: _cerr
       };
       next();
