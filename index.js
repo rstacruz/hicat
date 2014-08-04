@@ -13,14 +13,14 @@ var colorize;
  *
  * ~ filename (String): filename
  * ~ lang (String): language to use
- * ~ debug (Boolean): set to `true` for extra info
+ * ~ debug (Boolean): shows extra info if `true`
+ * ~ numbers (Boolean): shows line numbers if `true`
  */
 
 function hicat (str, options) {
   if (!options) options = {};
 
   var lang = options.lang || (options.filename && extname(options.filename));
-  var debug = options.debug;
   var out;
 
   if (lang) {
@@ -34,12 +34,31 @@ function hicat (str, options) {
   }
 
   if (!out || !out.value) throw new Error("failed to highlight");
-  out.ansi = html2ansi(out.value, { lang: out.language, debug: debug });
 
-  if (debug) {
+  // convert <span> tags to ANSI colors
+  out.ansi = html2ansi(out.value, {
+    lang: out.language,
+    debug: options.debug
+  });
+
+  // Add language comment
+  if (options.debug) {
     var info = "/* hicat language: " + out.language + " */";
     info = colorize(info, color('tag', 'debug'));
     out.ansi += "\n\n" + info + "\n";
+  }
+
+  // Add line numbers
+  if (options.numbers) {
+    var i = 0;
+    var digits = (""+out.ansi.split("\n").length).length;
+    out.ansi = out.ansi.replace(/^/gm, function (s) {
+      i++;
+      var pad = digits - (""+i).length;
+      var prefix = Array(pad+1).join(" ") + i + ' ';
+      prefix = colorize(prefix, color('line_number'));
+      return prefix + s;
+    });
   }
 
   return {

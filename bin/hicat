@@ -3,32 +3,18 @@
 
 var args = require('minimist')(process.argv.slice(2), {
   string: 'lang',
-  boolean: 'pager',
+  boolean: ['pager', 'numbers'],
   default: {
     pager: true,
   },
   alias: {
-    h: 'help', v: 'version', l: 'lang', page: 'pager'
+    h: 'help', v: 'version', l: 'lang', page: 'pager', N: 'numbers'
   }
 });
 
 var read = require('../lib/read'),
     hicat = require('../index'),
     term = require('../lib/term');
-
-/**
- * --debug: display detailed information.
- */
-
-if (args.debug)
-  process.env.HICAT_DEBUG = true;
-
-/**
- * --no-pager: don't pass the output to `less`.
- */
-
-if (args.pager === false)
-  process.env.HICAT_NO_PAGER = true;
 
 /**
  * --help: display help usage.
@@ -44,6 +30,7 @@ if (args.help) {
       '    -h, --help         print usage information',
       '    -v, --version      show version info and exit',
       '    -l, --lang TYPE    use a given language',
+      '    -N, --numbers      add line numbers',
       '        --languages    list available languages',
       '        --no-pager     disable the pager',
       '        --debug        show verbose info',
@@ -92,7 +79,12 @@ read(args._, function (err, data) {
       console.error(f.file + ": " + f.error.message);
       exit = 8;
     } else {
-      var output = hicat(f.data, { filename: f.name, lang: args.lang, debug: process.env.HICAT_DEBUG });
+      var output = hicat(f.data, {
+        filename: f.name,
+        lang: args.lang,
+        debug: args.debug,
+        numbers: args.numbers
+      });
       str += output.ansi;
     }
   });
@@ -101,7 +93,7 @@ read(args._, function (err, data) {
   var stdin = files && files[0] && files[0].stdin;
 
   // don't use the pager on --no-pager, piping, or non-0 exit codes
-  if (process.env.HICAT_NO_PAGER || stdin || exit)
+  if (!args.pager || stdin || exit)
     process.stdout.write(str);
   else
     term.print(str);
