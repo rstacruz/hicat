@@ -52,6 +52,7 @@ function hicat (str, options) {
   if (options.numbers) {
     var i = 0;
     var digits = (""+out.ansi.split("\n").length).length;
+    if (digits < 3) digits = 3;
     out.ansi = out.ansi.replace(/^/gm, function (s) {
       i++;
       var pad = digits - (""+i).length;

@@ -98,13 +98,13 @@ describe('--numbers', function () {
   success();
 
   it('prefixes with numbers', function () {
-    expect(result.stripped).match(/1 class MyClass/);
-    expect(result.stripped).match(/2   NUMBER = 200/);
-    expect(result.stripped).match(/4   def method/);
+    expect(result.stripped).match(/  1 class MyClass/);
+    expect(result.stripped).match(/  2   NUMBER = 200/);
+    expect(result.stripped).match(/  4   def method/);
   });
 
   it('colors the numbers', function () {
-    expect(result.out).include(hicat.colorize('3 ', hicat.color('line_number')));
+    expect(result.out).include(hicat.colorize('  3 ', hicat.color('line_number')));
   });
 });
 
