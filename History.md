@@ -1,3 +1,10 @@
+## v0.6.1 - August 4, 2014
+
+ * Fix `--numbers --debug` adding line numbers to debug info.
+ * Fix `--numbers` putting an extra line
+ * Always assume that small files (<24 lines) don't need a pager.
+ * Don't wrap long lines when using the pager.
+
 ## v0.6.0 - August 4, 2014
 
  * Add the `--numbers` option for line numbers.
