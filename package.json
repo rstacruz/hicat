@@ -6,7 +6,7 @@
   "repository": {
     "type": "git",
     "url": "http://github.com/rstacruz/hicat.git"
-  }
+  },
   "description": "Command-line syntax highlighter.",
   "main": "index.js",
   "scripts": {
