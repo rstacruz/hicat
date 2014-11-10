@@ -2,7 +2,7 @@
   "name": "hicat",
   "author": "Rico Sta. Cruz <hi@ricostacruz.com>",
   "license": "MIT",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "repository": {
     "type": "git",
     "url": "http://github.com/rstacruz/hicat.git"

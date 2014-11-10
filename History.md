@@ -1,3 +1,7 @@
+## v0.6.2 - November 10, 2014
+
+ * Add *repository* field to `package.json`. No functional changes.
+
 ## v0.6.1 - August 4, 2014
 
  * Fix `--numbers --debug` adding line numbers to debug info.
