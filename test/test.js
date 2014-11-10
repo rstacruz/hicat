@@ -42,13 +42,13 @@ describe('A simple example', function() {
   var str, out, input;
 
   beforeEach(function () {
-    input = 'var x = 2345 + "hi"; /*yo*/';
+    input = 'var x = 2345 + "hi"; /*yo*/ window.document.x = function($){};';
     out = hicat(input);
     str = out.ansi;
   });
 
   it('produces .language', function () {
-    expect(out.language).be.eql('haxe');
+    expect(out.language).be.eql('javascript');
   });
 
   it('produces .ansi', function () {
@@ -65,12 +65,12 @@ describe('A simple example', function() {
   });
 
   it('highlights numbers', function () {
-    var fragment = hicat.colorize('2345', hicat.color('number', 'haxe'));
+    var fragment = hicat.colorize('2345', hicat.color('number', 'javascript'));
     expect(str).include(str);
   });
 
   it('highlights comments', function () {
-    var fragment = hicat.colorize('/*yo*/', hicat.color('comment', 'haxe'));
+    var fragment = hicat.colorize('/*yo*/', hicat.color('comment', 'javascript'));
     expect(str).include(fragment);
   });
 });
