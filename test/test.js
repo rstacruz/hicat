@@ -1,5 +1,6 @@
 require('./setup');
 var extend = require('util')._extend;
+var out, input, str;
 
 describe('Hicat the module', function() {
   it('is a function', function () {
@@ -13,8 +14,6 @@ describe('Hicat the module', function() {
 });
 
 describe('Explicitly setting the language', function() {
-  var out, input;
-
   beforeEach(function () {
     input = 'var x = 2 + "hi"; /*yo*/';
     out = hicat(input, { lang: 'javascript' });
@@ -25,9 +24,23 @@ describe('Explicitly setting the language', function() {
   });
 });
 
-describe('Explicitly setting an invalid language', function() {
-  var str, out, input;
+describe('Json prettification', function () {
+  var obj = {
+    name: "Jake Rockwell",
+    position: "Land Operations Specialist"
+  };
 
+  beforeEach(function () {
+    input = JSON.stringify(obj);
+    out = hicat(input, { lang: 'json' });
+  });
+
+  it('happens', function () {
+    expect(out.raw).eql(JSON.stringify(obj, null, 2) + "\n");
+  });
+});
+
+describe('Explicitly setting an invalid language', function() {
   beforeEach(function () {
     input = '{"a":2}';
     out = hicat(input, { lang: 'aoeu' });

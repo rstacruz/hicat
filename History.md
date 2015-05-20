@@ -1,3 +1,7 @@
+## v0.7.0
+
+ * Automatically prettifies JSON files.
+
 ## v0.6.2 - November 10, 2014
 
  * Add *repository* field to `package.json`. No functional changes.

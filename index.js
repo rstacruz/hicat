@@ -24,6 +24,8 @@ function hicat (str, options) {
   var out;
 
   if (lang) {
+    if (lang === 'json')
+      str = formatJson(str);
     try {
       out = hljs.highlight(lang, str);
     } catch (e) {
@@ -178,6 +180,20 @@ function replaceSpan (str, options) {
       }
       return colorize(s, code);
     });
+}
+
+/**
+ * formatJson() : formatJson(str)
+ * Prettifies a JSON string
+ */
+
+function formatJson (str) {
+  try {
+    // return require('util').inspect(JSON.parse(str));
+    return JSON.stringify(JSON.parse(str), null, 2) + "\n";
+  } catch (e) {
+    return str;
+  }
 }
 
 /**
