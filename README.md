@@ -1,6 +1,6 @@
 # hicat :cat:
 
-![image](https://user-images.githubusercontent.com/74385/102151429-f6ccdd80-3ec6-11eb-84a4-68358ac2bc3b.png)
+![image](https://raw.githubusercontent.com/rstacruz/hicat/gh-pages/hicat.gif)
 
 `cat` with syntax highlighting. The language is auto-detected through the file
 extension.
