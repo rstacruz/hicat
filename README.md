@@ -17,9 +17,9 @@ curl http://example.com | hicat
 
 If hicat fails to detect a language, specify it using `-l LANG`.
 
-````sh
+```sh
 curl http://example.com | hicat -l xml
-``
+```
 
 [![Status](https://travis-ci.org/rstacruz/hicat.svg?branch=master)](https://travis-ci.org/rstacruz/hicat)
 
@@ -27,7 +27,7 @@ curl http://example.com | hicat -l xml
 
 ```sh
 npm install -g hicat
-````
+```
 
 [![npm version](https://badge.fury.io/js/hicat.svg)](https://npmjs.org/package/hicat "View this project on npm")
 
