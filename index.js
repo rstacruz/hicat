@@ -1,4 +1,6 @@
-var hljs = require('highlight.js');
+var hljs     = require('highlight.js');
+var entities = require('html-entities');
+
 var colorize;
 
 /***
@@ -68,7 +70,7 @@ function hicat (str, options) {
   }
 
   return {
-    ansi: out.ansi,
+    ansi: entities.decode(out.ansi, {level: 'html5', scope: 'strict'}),
     language: out.language,
     html: out.value,
     raw: str
@@ -152,10 +154,7 @@ function html2ansi (str, options) {
 
   return str
     .replace(/<span class="([^"]*)">/g, '')
-    .replace(/<\/span>/g, '')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&amp;/g, '&');
+    .replace(/<\/span>/g, '');
 }
 
 /**
