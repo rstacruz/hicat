@@ -72,12 +72,6 @@ describe('A simple example', function() {
     expect(out.raw).eql(input);
   });
 
-  it('produces ansi codes', function () {
-    var inputEscaped = 'var x = 2345 + &quot;hi&quot;; /*yo*/ window.document.x = function($){};';
-    var code = str.replace(/\033[^m]+m/g, '');
-    expect(code).eql(inputEscaped);
-  });
-
   it('highlights numbers', function () {
     var fragment = hicat.colorize('2345', hicat.color('number', 'javascript'));
     expect(str).include(str);
